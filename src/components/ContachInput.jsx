@@ -8,6 +8,7 @@ class ContactInput extends React.Component {
     this.state = {
       name: '',
       tag: '',
+      maxLength: 50,
     };
 
     this.onNameChangeEventHandler = this.onNameChangeEventHandler.bind(this);
@@ -16,11 +17,16 @@ class ContactInput extends React.Component {
   }
 
   onNameChangeEventHandler(event) {
-    this.setState(() => {
-      return {
-        name: event.target.value,
-      };
-    });
+    const inputValue = event.target.value;
+    const maxLength = this.state.maxLength;
+
+    if (inputValue.length <= maxLength) {
+      this.setState(() => {
+        return {
+          name: inputValue,
+        };
+      });
+    }
   }
 
   onTagChangeEventHandler(event) {
@@ -39,6 +45,7 @@ class ContactInput extends React.Component {
   render() {
     return (
       <form className="contact-input" onSubmit={this.onSubmitEventHandler}>
+        <p>Characters left: {this.state.maxLength - this.state.name.length}</p>
         <input type="text" placeholder="nama" value={this.state.name} onChange={this.onNameChangeEventHandler} />
         <input type="text" placeholder="tag" value={this.state.tag} onChange={this.onTagChangeEventHandler} />
         <button type="submit">tambah</button>
