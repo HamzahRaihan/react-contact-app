@@ -15,11 +15,13 @@ class ContactApp extends React.Component {
     const contacts = this.state.contacts.filter((contact) => contact.id !== id);
     this.setState({ contacts });
   }
+
   render() {
     return (
       <div className="contact-app">
         <h1>Daftar Kontak</h1>
         <ContactList contacts={this.state.contacts} onDelete={this.onDeleteHandler} />
+        <RatingStars />
       </div>
     );
   }
